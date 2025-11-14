@@ -26,32 +26,56 @@ export async function POST(request: Request) {
       return NextResponse.json(recipesData);
     }
 
+    const { dietaryFilter, timeFilter } = body;
+
     const allRecipes: Recipe[] = recipesData;
 
     const scoredRecipes = allRecipes.map(recipe => {
-      let ownedIngredients = 0;
-      recipe.ingredients.forEach(recipeIngredient => {
-        if (userIngredients.includes(recipeIngredient.name.toLowerCase())) {
-          ownedIngredients++;
-        }
-      });
-      
-      const totalIngredients = recipe.ingredients.length;
-      const matchPercentage = (ownedIngredients / totalIngredients) * 100;
-      const missingIngredients = totalIngredients - ownedIngredients;
+        const recipeIngredientsLower = recipe.ingredients.map(ing => ing.name.toLowerCase());
+        let ownedIngredientsCount = 0;
+        let ownedIngredientNames: string[] = [];
+        let missingIngredientNames: string[] = [];
 
-      // The scoring formula: high match percentage is good, but penalize for missing items
-      const finalScore = matchPercentage - (missingIngredients * 10);
+        recipeIngredientsLower.forEach(recipeIng => {
+            if (userIngredients.includes(recipeIng)) {
+            ownedIngredientsCount++;
+            ownedIngredientNames.push(recipeIng);
+            }
+        });
+        
+        // Now find the missing ones
+        missingIngredientNames = recipeIngredientsLower.filter(recipeIng => !userIngredients.includes(recipeIng));
 
-      return { ...recipe, score: finalScore, ownedIngredients, missingIngredients };
+        const totalIngredients = recipe.ingredients.length;
+        const matchPercentage = totalIngredients > 0 ? (ownedIngredientsCount / totalIngredients) * 100 : 0;
+        const missingIngredientsCount = totalIngredients - ownedIngredientsCount;
+        const finalScore = matchPercentage - (missingIngredientsCount * 10);
+
+        return { 
+            ...recipe, 
+            score: finalScore, 
+            ownedIngredients: ownedIngredientsCount, 
+            missingIngredients: missingIngredientsCount,
+            missingIngredientNames // Add this to the returned object
+        };
     });
 
-    // Filter out recipes that don't have any matching ingredients and sort by score
-    const sortedRecipes = scoredRecipes
-      .filter(recipe => recipe.ownedIngredients > 0)
-      .sort((a, b) => b.score - a.score);
+    const filteredAndSortedRecipes = scoredRecipes
+    .filter(recipe => {
+        // Keep recipes with at least one matching ingredient
+        const hasMatches = recipe.ownedIngredients > 0;
+        
+        // Dietary filter logic
+        const dietMatch = dietaryFilter === 'all' || recipe.dietary.includes(dietaryFilter);
+        
+        // Time filter logic
+        const timeMatch = timeFilter === 0 || recipe.cookingTime <= timeFilter;
 
-    return NextResponse.json(sortedRecipes);
+        return hasMatches && dietMatch && timeMatch;
+    })
+    .sort((a, b) => b.score - a.score);
+
+    return NextResponse.json(filteredAndSortedRecipes);
 
   } catch (error) {
     console.error(error);

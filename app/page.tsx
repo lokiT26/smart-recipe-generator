@@ -12,6 +12,9 @@ type Recipe = {
   difficulty: string;
   dietary: string[];
   nutrition: { calories: number; protein: string };
+  ownedIngredients?: number;
+  missingIngredients?: number;
+  missingIngredientNames?: string[];
 };
 
 export default function Home() {
@@ -19,6 +22,8 @@ export default function Home() {
   const [displayedRecipes, setDisplayedRecipes] = useState<Recipe[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isIdentifying, setIsIdentifying] = useState(false);
+  const [dietaryFilter, setDietaryFilter] = useState<string>('all');
+  const [timeFilter, setTimeFilter] = useState<number>(0); // 0 means 'any'
   
   // A ref to access the hidden file input element
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -43,7 +48,11 @@ export default function Home() {
       const response = await fetch('/api/find-recipes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ingredients }),
+        body: JSON.stringify({ 
+          ingredients,
+          dietaryFilter,
+          timeFilter
+        }),
       });
       if (!response.ok) throw new Error('Network response was not ok');
       const matchedRecipes = await response.json();
@@ -148,6 +157,39 @@ export default function Home() {
           </button>
         </div>
 
+        {/* Filters */}
+        <div className="flex justify-center gap-4 mb-8 flex-wrap">
+          <div>
+            <label htmlFor="diet" className="block text-sm font-medium text-gray-700">Dietary Preference</label>
+            <select
+              id="diet"
+              value={dietaryFilter}
+              onChange={(e) => setDietaryFilter(e.target.value)}
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+            >
+              <option value="all">All</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="gluten-free">Gluten-Free</option>
+              <option value="dairy-free">Dairy-Free</option>
+              <option value="low-carb">Low-Carb</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="time" className="block text-sm font-medium text-gray-700">Max Cooking Time (mins)</label>
+            <select
+              id="time"
+              value={timeFilter}
+              onChange={(e) => setTimeFilter(Number(e.target.value))}
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+            >
+              <option value={0}>Any</option>
+              <option value={15}>15 mins</option>
+              <option value={30}>30 mins</option>
+              <option value={60}>60 mins</option>
+            </select>
+          </div>
+        </div>
+
         {/* Recipe Display Area remains the same... */}
         <div>
           {isLoading && !isSearching ? (
@@ -157,20 +199,26 @@ export default function Home() {
           ) : displayedRecipes.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayedRecipes.map((recipe) => (
-                <div key={recipe.id} className="border rounded-lg p-4 shadow-sm bg-white hover:shadow-md transition-shadow">
-                  {/* Card content is unchanged */}
-                  <h2 className="text-xl font-semibold text-green-700">{recipe.name}</h2>
-                  <p className="text-gray-600 mt-2">
-                    <strong>Time:</strong> {recipe.cookingTime} mins | <strong>Difficulty:</strong> {recipe.difficulty}
-                  </p>
-                  <div className="mt-2">
-                    <h3 className="font-bold">Ingredients:</h3>
-                    <ul className="list-disc list-inside text-sm text-gray-500">
-                      {recipe.ingredients.slice(0, 4).map((ing) => (
-                        <li key={ing.name}>{ing.name}</li>
-                      ))}
-                      {recipe.ingredients.length > 4 && <li className="text-gray-400">...and more</li>}
-                    </ul>
+                <div key={recipe.id} className="border rounded-lg p-4 shadow-sm bg-white hover:shadow-md transition-shadow flex flex-col justify-between">
+                  <div>
+                    <h2 className="text-xl font-semibold text-green-700">{recipe.name}</h2>
+                    <p className="text-gray-600 mt-2">
+                      <strong>Time:</strong> {recipe.cookingTime} mins | <strong>Difficulty:</strong> {recipe.difficulty}
+                    </p>
+                    
+                    {/* Match Information Display */}
+                    {recipe.ownedIngredients !== undefined && (
+                      <div className="mt-3 bg-green-50 border border-green-200 rounded-md p-2 text-sm">
+                        <p className="font-bold text-green-800">
+                          You have {recipe.ownedIngredients} / {recipe.ownedIngredients + (recipe.missingIngredients || 0)} ingredients.
+                        </p>
+                        {recipe.missingIngredientNames && recipe.missingIngredientNames.length > 0 && (
+                          <p className="text-gray-700 mt-1">
+                            <span className="font-semibold">Missing:</span> {recipe.missingIngredientNames.join(', ')}
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
