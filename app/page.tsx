@@ -1,7 +1,6 @@
-'use client'; // This directive is required for using React hooks
+'use client';
 
-import { useState, useEffect } from 'react';
-import recipesData from '@/data/recipes.json';
+import { useState, useEffect, useRef } from 'react';
 
 // Define a type for a single recipe
 type Recipe = {
@@ -16,45 +15,89 @@ type Recipe = {
 };
 
 export default function Home() {
-  // State to hold the user's text input
   const [userInput, setUserInput] = useState('');
-  // State to hold the recipes we want to display
   const [displayedRecipes, setDisplayedRecipes] = useState<Recipe[]>([]);
-  // State to manage loading status
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [isIdentifying, setIsIdentifying] = useState(false);
+  
+  // A ref to access the hidden file input element
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // useEffect hook to load all recipes when the component first loads
   useEffect(() => {
-    setDisplayedRecipes(recipesData as Recipe[]);
+    // Initially load all recipes
+    const loadInitialRecipes = async () => {
+       const response = await fetch('/api/find-recipes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ingredients: '' }), // Empty search returns all
+      });
+      const allRecipes = await response.json();
+      setDisplayedRecipes(allRecipes);
+    }
+    loadInitialRecipes();
   }, []);
 
-  const handleSearch = async () => {
-    setIsLoading(true);
-
+  const handleSearch = async (ingredients: string) => {
+    setIsSearching(true);
     try {
       const response = await fetch('/api/find-recipes', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ingredients: userInput }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ingredients }),
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
+      if (!response.ok) throw new Error('Network response was not ok');
       const matchedRecipes = await response.json();
       setDisplayedRecipes(matchedRecipes);
-
     } catch (error) {
       console.error("Failed to fetch recipes:", error);
-      // Optionally, set an error state to show a message to the user
-      setDisplayedRecipes([]); // Clear recipes on error
+      setDisplayedRecipes([]);
     } finally {
-      setIsLoading(false);
+      setIsSearching(false);
     }
   };
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setIsIdentifying(true);
+
+    // Convert image file to a base64 string
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = async () => {
+      const base64String = (reader.result as string).split(',')[1];
+      
+      try {
+        const response = await fetch('/api/identify-ingredients', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ imageBase64: base64String }),
+        });
+        if (!response.ok) throw new Error('Image identification failed');
+        const data = await response.json();
+        const identifiedIngredients = data.ingredients.join(', ');
+        
+        // Populate the input field and trigger the search
+        setUserInput(identifiedIngredients);
+        if (identifiedIngredients) {
+          await handleSearch(identifiedIngredients);
+        }
+
+      } catch (error) {
+        console.error("Failed to identify ingredients:", error);
+        // You could add an error message for the user here
+      } finally {
+        setIsIdentifying(false);
+      }
+    };
+    reader.onerror = (error) => {
+      console.error("File reading error:", error);
+      setIsIdentifying(false);
+    }
+  };
+
+  const isLoading = isSearching || isIdentifying;
 
   return (
     <main className="p-4 sm:p-8 bg-gray-50 min-h-screen">
@@ -63,35 +106,59 @@ export default function Home() {
           Smart Recipe Generator
         </h1>
         <p className="text-center text-gray-500 mb-8">
-          Enter your ingredients, separated by commas.
+          Upload a photo of your ingredients or type them below.
         </p>
 
-        {/* Search Form */}
-        <div className="flex gap-2 mb-8">
-          <input
-            type="text"
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-            placeholder="e.g., tomato, onion, chicken"
-            className="flex-grow border rounded-md p-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+        {/* Input & Action Area */}
+        <div className="mb-8">
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              placeholder="e.g., tomato, onion, chicken"
+              className="flex-grow border rounded-md p-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+            />
+            <button
+              onClick={() => handleSearch(userInput)}
+              disabled={isLoading}
+              className="bg-green-600 text-white font-bold py-2 px-4 rounded-md hover:bg-green-700 disabled:bg-gray-400 whitespace-nowrap"
+            >
+              {isSearching ? 'Searching...' : 'Find Recipes'}
+            </button>
+          </div>
+          <div className="flex items-center justify-center mt-4">
+             <div className="w-full border-t border-gray-300"></div>
+             <span className="px-2 text-gray-500 bg-gray-50 -mt-3">OR</span>
+             <div className="w-full border-t border-gray-300"></div>
+          </div>
+          <input 
+            type="file" 
+            ref={fileInputRef}
+            onChange={handleImageUpload}
+            className="hidden"
+            accept="image/*"
           />
           <button
-            onClick={handleSearch}
+            onClick={() => fileInputRef.current?.click()}
             disabled={isLoading}
-            className="bg-green-600 text-white font-bold py-2 px-4 rounded-md hover:bg-green-700 disabled:bg-gray-400"
+            className="w-full mt-4 bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-gray-400"
           >
-            {isLoading ? 'Searching...' : 'Find Recipes'}
+            {isIdentifying ? 'Identifying...' : 'Upload an Image'}
           </button>
         </div>
 
-        {/* Recipe Display Area */}
+        {/* Recipe Display Area remains the same... */}
         <div>
-          {isLoading ? (
-            <p className="text-center text-gray-600">Finding the best recipes for you...</p>
+          {isLoading && !isSearching ? (
+             <p className="text-center text-gray-600">Identifying ingredients from your image...</p>
+          ) : isSearching ? (
+             <p className="text-center text-gray-600">Finding the best recipes for you...</p>
           ) : displayedRecipes.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayedRecipes.map((recipe) => (
                 <div key={recipe.id} className="border rounded-lg p-4 shadow-sm bg-white hover:shadow-md transition-shadow">
+                  {/* Card content is unchanged */}
                   <h2 className="text-xl font-semibold text-green-700">{recipe.name}</h2>
                   <p className="text-gray-600 mt-2">
                     <strong>Time:</strong> {recipe.cookingTime} mins | <strong>Difficulty:</strong> {recipe.difficulty}
