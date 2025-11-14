@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "name": "Classic Tomato Pasta",
+    "ingredients": [
+      { "name": "pasta", "quantity": "200g" },
+      { "name": "tomato", "quantity": "4 large" },
+      { "name": "onion", "quantity": "1 medium" },
+      { "name": "garlic", "quantity": "2 cloves" },
+      { "name": "olive oil", "quantity": "2 tbsp" }
+    ],
+    "instructions": [
+      "Boil the pasta according to package directions.",
+      "While pasta is cooking, chop onion and garlic.",
+      "Sauté onion and garlic in olive oil until soft.",
+      "Add chopped tomatoes and simmer for 15 minutes to create a sauce.",
+      "Drain the pasta and mix it with the sauce. Serve hot."
+    ],
+    "cookingTime": 25,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian", "dairy-free"],
+    "nutrition": { "calories": 450, "protein": "12g" }
+  },
+  {
+    "id": 2,
+    "name": "Simple Chicken Salad",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "1 cooked" },
+      { "name": "lettuce", "quantity": "1 head" },
+      { "name": "tomato", "quantity": "1 medium" },
+      { "name": "cucumber", "quantity": "1/2" },
+      { "name": "olive oil", "quantity": "1 tbsp" },
+      { "name": "lemon juice", "quantity": "1 tbsp" }
+    ],
+    "instructions": [
+      "Chop the cooked chicken breast, lettuce, tomato, and cucumber.",
+      "Combine all chopped ingredients in a large bowl.",
+      "In a small bowl, whisk together olive oil and lemon juice for the dressing.",
+      "Pour dressing over the salad and toss to combine. Serve immediately."
+    ],
+    "cookingTime": 10,
+    "difficulty": "Easy",
+    "dietary": ["gluten-free", "low-carb"],
+    "nutrition": { "calories": 350, "protein": "30g" }
+  },
+  {
+    "id": 3,
+    "name": "Scrambled Eggs on Toast",
+    "ingredients": [
+      { "name": "egg", "quantity": "2" },
+      { "name": "bread", "quantity": "2 slices" },
+      { "name": "milk", "quantity": "2 tbsp" },
+      { "name": "butter", "quantity": "1 tsp" }
+    ],
+    "instructions": [
+      "Toast the bread slices to your liking.",
+      "Whisk eggs and milk together in a bowl.",
+      "Melt butter in a non-stick pan over medium heat.",
+      "Pour the egg mixture into the pan and cook, stirring gently, until they are soft and cooked through.",
+      "Serve the scrambled eggs on top of the toast."
+    ],
+    "cookingTime": 5,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian"],
+    "nutrition": { "calories": 300, "protein": "15g" }
+  }
+]
