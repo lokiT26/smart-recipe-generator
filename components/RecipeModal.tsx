@@ -25,7 +25,7 @@ export default function RecipeModal({ recipe, onClose }: RecipeModalProps) {
   return (
     // Backdrop: a semi-transparent overlay that covers the whole screen
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4"
+      className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
       onClick={onClose} // Clicking on the backdrop will close the modal
     >
       {/* Modal Content */}
@@ -46,10 +46,11 @@ export default function RecipeModal({ recipe, onClose }: RecipeModalProps) {
           </div>
 
           {/* Recipe Details */}
-          <div className="flex gap-6 text-gray-600 mb-6 border-b pb-4">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-gray-600 mb-6 border-b pb-4">
             <span><strong>Time:</strong> {recipe.cookingTime} mins</span>
             <span><strong>Difficulty:</strong> {recipe.difficulty}</span>
             <span><strong>Calories:</strong> {recipe.nutrition.calories} kcal</span>
+            <span><strong>Protein:</strong> {recipe.nutrition.protein}</span>
           </div>
 
           {/* Main Content: Ingredients and Instructions */}
@@ -59,7 +60,7 @@ export default function RecipeModal({ recipe, onClose }: RecipeModalProps) {
               <h3 className="text-xl font-semibold mb-3 text-gray-700">Ingredients</h3>
               <ul className="list-disc list-inside space-y-1">
                 {recipe.ingredients.map((ing, index) => (
-                  <li key={index}>
+                  <li key={index} className="text-gray-800">
                     <span className="font-semibold">{ing.quantity}</span> {ing.name}
                   </li>
                 ))}
@@ -71,7 +72,7 @@ export default function RecipeModal({ recipe, onClose }: RecipeModalProps) {
               <h3 className="text-xl font-semibold mb-3 text-gray-700">Instructions</h3>
               <ol className="list-decimal list-inside space-y-3">
                 {recipe.instructions.map((step, index) => (
-                  <li key={index}>{step}</li>
+                  <li key={index} className="text-gray-800">{step}</li>
                 ))}
               </ol>
             </div>

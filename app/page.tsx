@@ -128,7 +128,7 @@ export default function Home() {
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
               placeholder="e.g., tomato, onion, chicken"
-              className="flex-grow border rounded-md p-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+              className="flex-grow border border-gray-300 text-gray-900 rounded-md p-2 focus:ring-2 focus:ring-green-500 focus:outline-none placeholder:text-gray-400"
             />
             <button
               onClick={() => handleSearch(userInput)}
@@ -167,7 +167,7 @@ export default function Home() {
               id="diet"
               value={dietaryFilter}
               onChange={(e) => setDietaryFilter(e.target.value)}
-              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
             >
               <option value="all">All</option>
               <option value="vegetarian">Vegetarian</option>
@@ -182,7 +182,7 @@ export default function Home() {
               id="time"
               value={timeFilter}
               onChange={(e) => setTimeFilter(Number(e.target.value))}
-              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
             >
               <option value={0}>Any</option>
               <option value={15}>15 mins</option>
