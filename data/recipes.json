@@ -63,5 +63,365 @@
     "difficulty": "Easy",
     "dietary": ["vegetarian"],
     "nutrition": { "calories": 300, "protein": "15g" }
+  },
+  {
+    "id": 4,
+    "name": "Hearty Lentil Soup",
+    "ingredients": [
+      { "name": "lentil", "quantity": "1 cup" },
+      { "name": "carrot", "quantity": "2" },
+      { "name": "celery", "quantity": "2 stalks" },
+      { "name": "onion", "quantity": "1" },
+      { "name": "vegetable broth", "quantity": "4 cups" },
+      { "name": "garlic", "quantity": "2 cloves" }
+    ],
+    "instructions": [
+      "Finely chop carrot, celery, onion, and garlic.",
+      "In a large pot, sauté the chopped vegetables until soft.",
+      "Rinse the lentils and add them to the pot.",
+      "Pour in the vegetable broth, bring to a boil, then reduce heat and simmer for 30-40 minutes until lentils are tender."
+    ],
+    "cookingTime": 45,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian", "gluten-free", "dairy-free"],
+    "nutrition": { "calories": 300, "protein": "18g" }
+  },
+  {
+    "id": 5,
+    "name": "Quick Chicken Stir-Fry",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "1" },
+      { "name": "bell pepper", "quantity": "1" },
+      { "name": "broccoli", "quantity": "1 cup" },
+      { "name": "soy sauce", "quantity": "3 tbsp" },
+      { "name": "rice", "quantity": "1 cup uncooked" }
+    ],
+    "instructions": [
+      "Cook rice according to package directions.",
+      "Slice chicken and vegetables into bite-sized pieces.",
+      "In a wok or large pan, stir-fry the chicken until cooked through.",
+      "Add broccoli and bell pepper, and cook for another 5-7 minutes until tender-crisp.",
+      "Add soy sauce, stir to combine, and serve over rice."
+    ],
+    "cookingTime": 25,
+    "difficulty": "Easy",
+    "dietary": ["dairy-free"],
+    "nutrition": { "calories": 500, "protein": "40g" }
+  },
+  {
+    "id": 6,
+    "name": "Classic Beef Tacos",
+    "ingredients": [
+      { "name": "ground beef", "quantity": "1 lb" },
+      { "name": "taco seasoning", "quantity": "1 packet" },
+      { "name": "tortilla", "quantity": "8" },
+      { "name": "lettuce", "quantity": "1 cup shredded" },
+      { "name": "tomato", "quantity": "1 diced" },
+      { "name": "cheese", "quantity": "1 cup shredded" }
+    ],
+    "instructions": [
+      "In a skillet, cook ground beef until browned. Drain fat.",
+      "Stir in taco seasoning and a little water, simmer for 5 minutes.",
+      "Warm tortillas according to package directions.",
+      "Assemble tacos with beef, lettuce, tomato, and cheese."
+    ],
+    "cookingTime": 20,
+    "difficulty": "Easy",
+    "dietary": [],
+    "nutrition": { "calories": 350, "protein": "25g" }
+  },
+  {
+    "id": 7,
+    "name": "Simple Greek Salad",
+    "ingredients": [
+      { "name": "cucumber", "quantity": "1" },
+      { "name": "tomato", "quantity": "2" },
+      { "name": "red onion", "quantity": "1/2" },
+      { "name": "feta cheese", "quantity": "1/2 cup" },
+      { "name": "olive oil", "quantity": "2 tbsp" }
+    ],
+    "instructions": [
+      "Chop cucumber, tomatoes, and red onion.",
+      "Combine vegetables in a bowl.",
+      "Crumble feta cheese over the top.",
+      "Drizzle with olive oil and toss gently."
+    ],
+    "cookingTime": 10,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian", "gluten-free", "low-carb"],
+    "nutrition": { "calories": 250, "protein": "8g" }
+  },
+  {
+    "id": 8,
+    "name": "Cheesy Quesadilla",
+    "ingredients": [
+      { "name": "tortilla", "quantity": "2" },
+      { "name": "cheese", "quantity": "1/2 cup shredded" },
+      { "name": "chicken breast", "quantity": "1/2 cooked & shredded" },
+      { "name": "butter", "quantity": "1 tsp" }
+    ],
+    "instructions": [
+      "Melt butter in a skillet over medium heat.",
+      "Place one tortilla in the skillet.",
+      "Sprinkle cheese and chicken over the tortilla.",
+      "Top with the second tortilla and cook for 2-3 minutes per side, until golden brown and cheese is melted."
+    ],
+    "cookingTime": 8,
+    "difficulty": "Easy",
+    "dietary": [],
+    "nutrition": { "calories": 450, "protein": "30g" }
+  },
+  {
+    "id": 9,
+    "name": "Lemon Herb Salmon",
+    "ingredients": [
+      { "name": "salmon fillet", "quantity": "2" },
+      { "name": "lemon", "quantity": "1" },
+      { "name": "dill", "quantity": "1 tbsp fresh" },
+      { "name": "olive oil", "quantity": "1 tbsp" },
+      { "name": "asparagus", "quantity": "1 bunch" }
+    ],
+    "instructions": [
+      "Preheat oven to 400°F (200°C).",
+      "Place salmon and asparagus on a baking sheet.",
+      "Drizzle with olive oil, juice from half the lemon, and sprinkle with dill.",
+      "Bake for 12-15 minutes, or until salmon is cooked through.",
+      "Serve with remaining lemon wedges."
+    ],
+    "cookingTime": 20,
+    "difficulty": "Easy",
+    "dietary": ["gluten-free", "dairy-free", "low-carb"],
+    "nutrition": { "calories": 400, "protein": "45g" }
+  },
+  {
+    "id": 10,
+    "name": "Black Bean Burgers",
+    "ingredients": [
+      { "name": "black beans", "quantity": "1 can" },
+      { "name": "bread crumbs", "quantity": "1/2 cup" },
+      { "name": "onion", "quantity": "1/4 cup chopped" },
+      { "name": "egg", "quantity": "1" },
+      { "name": "burger bun", "quantity": "4" }
+    ],
+    "instructions": [
+      "Rinse and drain black beans, then mash them in a bowl.",
+      "Mix in bread crumbs, onion, and egg until a patty can be formed.",
+      "Form into patties and cook in a lightly oiled pan for 5 minutes per side.",
+      "Serve on burger buns with your favorite toppings."
+    ],
+    "cookingTime": 25,
+    "difficulty": "Medium",
+    "dietary": ["vegetarian"],
+    "nutrition": { "calories": 380, "protein": "20g" }
+  },
+  {
+    "id": 11,
+    "name": "Creamy Mushroom Pasta",
+    "ingredients": [
+      { "name": "pasta", "quantity": "200g" },
+      { "name": "mushroom", "quantity": "1 cup sliced" },
+      { "name": "heavy cream", "quantity": "1/2 cup" },
+      { "name": "garlic", "quantity": "2 cloves" },
+      { "name": "parmesan cheese", "quantity": "1/4 cup" }
+    ],
+    "instructions": [
+      "Cook pasta according to package directions.",
+      "In a skillet, sauté garlic and mushrooms in butter or oil.",
+      "Reduce heat and stir in heavy cream and parmesan cheese.",
+      "Simmer until the sauce thickens slightly.",
+      "Drain pasta and toss with the creamy mushroom sauce."
+    ],
+    "cookingTime": 20,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian"],
+    "nutrition": { "calories": 600, "protein": "18g" }
+  },
+  {
+    "id": 12,
+    "name": "Oatmeal with Berries",
+    "ingredients": [
+      { "name": "oats", "quantity": "1/2 cup" },
+      { "name": "water", "quantity": "1 cup" },
+      { "name": "berries", "quantity": "1/2 cup mixed" },
+      { "name": "honey", "quantity": "1 tsp" }
+    ],
+    "instructions": [
+      "Combine oats and water in a small saucepan.",
+      "Bring to a boil, then reduce heat and cook for 5 minutes, stirring occasionally.",
+      "Pour into a bowl and top with fresh berries and a drizzle of honey."
+    ],
+    "cookingTime": 7,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian", "dairy-free"],
+    "nutrition": { "calories": 250, "protein": "6g" }
+  },
+  {
+    "id": 13,
+    "name": "Simple Guacamole",
+    "ingredients": [
+      { "name": "avocado", "quantity": "2 ripe" },
+      { "name": "lime", "quantity": "1" },
+      { "name": "red onion", "quantity": "1/4 cup chopped" },
+      { "name": "cilantro", "quantity": "2 tbsp chopped" }
+    ],
+    "instructions": [
+      "Mash the avocados in a bowl.",
+      "Squeeze in the juice from the lime.",
+      "Stir in the chopped red onion and cilantro.",
+      "Season with salt and pepper to taste. Serve with chips."
+    ],
+    "cookingTime": 5,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian", "gluten-free", "dairy-free"],
+    "nutrition": { "calories": 150, "protein": "2g" }
+  },
+  {
+    "id": 14,
+    "name": "Shepherd's Pie",
+    "ingredients": [
+      { "name": "ground beef", "quantity": "1 lb" },
+      { "name": "potato", "quantity": "3 large" },
+      { "name": "onion", "quantity": "1" },
+      { "name": "carrot", "quantity": "1" },
+      { "name": "beef broth", "quantity": "1 cup" },
+      { "name": "milk", "quantity": "1/4 cup" },
+      { "name": "butter", "quantity": "2 tbsp" }
+    ],
+    "instructions": [
+      "Peel and boil potatoes until tender. Mash with milk and butter.",
+      "In a separate pan, brown the ground beef with chopped onion and carrot. Drain fat.",
+      "Stir in beef broth and simmer until thickened.",
+      "Spread the beef mixture in a baking dish and top with the mashed potatoes.",
+      "Bake at 375°F (190°C) for 20 minutes until golden brown."
+    ],
+    "cookingTime": 50,
+    "difficulty": "Medium",
+    "dietary": [],
+    "nutrition": { "calories": 550, "protein": "30g" }
+  },
+  {
+    "id": 15,
+    "name": "Classic Tuna Sandwich",
+    "ingredients": [
+      { "name": "canned tuna", "quantity": "1 can" },
+      { "name": "mayonnaise", "quantity": "2 tbsp" },
+      { "name": "celery", "quantity": "1 stalk, chopped" },
+      { "name": "bread", "quantity": "2 slices" }
+    ],
+    "instructions": [
+      "Drain the canned tuna and place it in a bowl.",
+      "Mix in mayonnaise and chopped celery.",
+      "Spread the tuna salad mixture onto one slice of bread.",
+      "Top with the other slice of bread."
+    ],
+    "cookingTime": 5,
+    "difficulty": "Easy",
+    "dietary": [],
+    "nutrition": { "calories": 400, "protein": "25g" }
+  },
+  {
+    "id": 16,
+    "name": "Garlic Roasted Broccoli",
+    "ingredients": [
+      { "name": "broccoli", "quantity": "1 head" },
+      { "name": "garlic", "quantity": "3 cloves, minced" },
+      { "name": "olive oil", "quantity": "2 tbsp" }
+    ],
+    "instructions": [
+      "Preheat oven to 425°F (220°C).",
+      "Cut broccoli into florets and toss with olive oil and minced garlic.",
+      "Spread on a baking sheet in a single layer.",
+      "Roast for 15-20 minutes, until tender and slightly browned."
+    ],
+    "cookingTime": 25,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian", "gluten-free", "dairy-free"],
+    "nutrition": { "calories": 120, "protein": "4g" }
+  },
+  {
+    "id": 17,
+    "name": "Simple Pancakes",
+    "ingredients": [
+      { "name": "flour", "quantity": "1 cup" },
+      { "name": "milk", "quantity": "1 cup" },
+      { "name": "egg", "quantity": "1" },
+      { "name": "baking powder", "quantity": "2 tsp" },
+      { "name": "sugar", "quantity": "2 tbsp" }
+    ],
+    "instructions": [
+      "In a bowl, mix together flour, baking powder, and sugar.",
+      "In a separate bowl, whisk the egg and milk.",
+      "Pour the wet ingredients into the dry ingredients and stir until just combined.",
+      "Heat a lightly oiled griddle or pan and pour 1/4 cup of batter for each pancake.",
+      "Cook until bubbles form, then flip and cook until golden brown."
+    ],
+    "cookingTime": 15,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian"],
+    "nutrition": { "calories": 250, "protein": "8g" }
+  },
+  {
+    "id": 18,
+    "name": "Chickpea Curry",
+    "ingredients": [
+      { "name": "chickpeas", "quantity": "1 can" },
+      { "name": "coconut milk", "quantity": "1 can" },
+      { "name": "onion", "quantity": "1" },
+      { "name": "garlic", "quantity": "2 cloves" },
+      { "name": "curry powder", "quantity": "2 tbsp" },
+      { "name": "rice", "quantity": "1 cup uncooked" }
+    ],
+    "instructions": [
+      "Cook rice according to package directions.",
+      "Sauté chopped onion and garlic in a pan until soft.",
+      "Stir in curry powder and cook for 1 minute until fragrant.",
+      "Add the chickpeas and coconut milk, bring to a simmer, and cook for 10 minutes.",
+      "Serve the curry over rice."
+    ],
+    "cookingTime": 25,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian", "gluten-free", "dairy-free"],
+    "nutrition": { "calories": 480, "protein": "15g" }
+  },
+  {
+    "id": 19,
+    "name": "Strawberry Banana Smoothie",
+    "ingredients": [
+      { "name": "strawberry", "quantity": "1 cup" },
+      { "name": "banana", "quantity": "1" },
+      { "name": "yogurt", "quantity": "1/2 cup" },
+      { "name": "milk", "quantity": "1/2 cup" }
+    ],
+    "instructions": [
+      "Combine all ingredients in a blender.",
+      "Blend until smooth.",
+      "Pour into a glass and serve immediately."
+    ],
+    "cookingTime": 5,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian", "gluten-free"],
+    "nutrition": { "calories": 220, "protein": "10g" }
+  },
+  {
+    "id": 20,
+    "name": "Simple Fried Rice",
+    "ingredients": [
+      { "name": "rice", "quantity": "2 cups cooked" },
+      { "name": "egg", "quantity": "2" },
+      { "name": "peas", "quantity": "1/2 cup" },
+      { "name": "carrot", "quantity": "1/2 cup diced" },
+      { "name": "soy sauce", "quantity": "3 tbsp" }
+    ],
+    "instructions": [
+      "Scramble the eggs in a large skillet or wok, then set aside.",
+      "Add peas and carrots to the skillet and cook until tender.",
+      "Add the cooked rice to the skillet and break it up.",
+      "Stir in the soy sauce and the scrambled eggs.",
+      "Cook, stirring constantly, until everything is heated through."
+    ],
+    "cookingTime": 15,
+    "difficulty": "Easy",
+    "dietary": ["vegetarian"],
+    "nutrition": { "calories": 400, "protein": "15g" }
   }
 ]
