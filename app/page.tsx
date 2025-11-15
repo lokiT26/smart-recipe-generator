@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import RecipeModal from '@/components/RecipeModal';
 
 // Define a type for a single recipe
 type Recipe = {
@@ -24,6 +25,7 @@ export default function Home() {
   const [isIdentifying, setIsIdentifying] = useState(false);
   const [dietaryFilter, setDietaryFilter] = useState<string>('all');
   const [timeFilter, setTimeFilter] = useState<number>(0); // 0 means 'any'
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   
   // A ref to access the hidden file input element
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -199,7 +201,9 @@ export default function Home() {
           ) : displayedRecipes.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayedRecipes.map((recipe) => (
-                <div key={recipe.id} className="border rounded-lg p-4 shadow-sm bg-white hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div key={recipe.id} className="border rounded-lg p-4 shadow-sm bg-white hover:shadow-lg transition-shadow flex flex-col justify-between cursor-pointer"
+                  onClick={() => setSelectedRecipe(recipe)}
+                >
                   <div>
                     <h2 className="text-xl font-semibold text-green-700">{recipe.name}</h2>
                     <p className="text-gray-600 mt-2">
@@ -227,6 +231,15 @@ export default function Home() {
             <p className="text-center text-gray-600">No recipes found. Try different ingredients!</p>
           )}
         </div>
+
+        {/* Conditionally render the RecipeModal */}
+        {selectedRecipe && (
+          <RecipeModal 
+            recipe={selectedRecipe} 
+            onClose={() => setSelectedRecipe(null)} 
+          />
+        )}
+        
       </div>
     </main>
   );
